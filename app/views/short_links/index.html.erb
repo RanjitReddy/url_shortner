@@ -1,0 +1,34 @@
+<div class='container col-12'>
+  <div class='float-left'>
+    <h3>URL Shorterner</h3>
+  </div>
+  <div class='float-right'><%= link_to 'New Short Link', new_short_link_path, class: 'btn btn-primary btn-sm' %>  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Url/Link</th>
+      <th scope="col">Short URL</th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @short_links.present? %>
+      <% @short_links.each do |short_link| %>
+        <tr>
+          <td scope="row"><%= short_link.url %></td>
+          <td><%= short_link.slug %></td>
+          <td><%= link_to 'Show', short_url(slug: short_link.slug) %></td>
+          <td><%= link_to 'Edit', edit_short_link_path(short_link) %></td>
+          <td><%= link_to 'Destroy', short_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="5">No data</td>
+      </tr> 
+    <% end %>
+  </tbody>
+</table>
